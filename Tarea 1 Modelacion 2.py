@@ -83,8 +83,8 @@ def createColorCircle(N, R, r, g, b):
 
     return bs.Shape(vertices, indices)
 
-# Función que crea un grafo de escena de un hombre de nieve
 
+# Función que crea la Mariposa
 
 def createButterfly(pipeline):
 
@@ -112,26 +112,28 @@ def createButterfly(pipeline):
 
     # Body
 
-    ButterflyBody = sg.SceneGraphNode("ButterflyBody")
-    ButterflyBody.childs = [YellowTriangleNode]
+    CuerpodeMariposa = sg.SceneGraphNode("CuerpodeMariposa")
+    CuerpodeMariposa.childs = [YellowTriangleNode]
 
-    ButterflyBody1 = sg.SceneGraphNode("ButterflyBody1")
-    ButterflyBody1.transform = tr.matmul([
+    CuerpodeMariposa1 = sg.SceneGraphNode("CuerpodeMariposa1")
+    CuerpodeMariposa1.transform = tr.matmul([
         tr.rotationZ(20*np.pi/180),
         tr.translate(0,10,0),
         tr.scale(2,15,1)
     ])
-    ButterflyBody1.childs = [ButterflyBody]
+    CuerpodeMariposa1.childs = [CuerpodeMariposa]
 
-    ButterflyBody2 = sg.SceneGraphNode("ButterflyBody2")
-    ButterflyBody2.transform = tr.matmul([
+    CuerpodeMariposa2 = sg.SceneGraphNode("CuerpodeMariposa2")
+    CuerpodeMariposa2.transform = tr.matmul([
         tr.rotationZ(20*np.pi/180),
         tr.rotationX(np.pi),
         
         tr.translate(0,5,0),
         tr.scale(2,15,1)
     ])
-    ButterflyBody2.childs = [ButterflyBody]
+    CuerpodeMariposa2.childs = [CuerpodeMariposa]
+
+    # Antenas
 
     Antenas = sg.SceneGraphNode("Antenas")
     Antenas.childs = [BrownTriangleNode]
@@ -157,8 +159,10 @@ def createButterfly(pipeline):
     Antenitas = sg.SceneGraphNode("Antenitas")
     Antenitas.childs = [Antena1, Antena2]
 
-    body = sg.SceneGraphNode("body")
-    body.childs = [Antenitas, ButterflyBody1, ButterflyBody2]
+    # Cuerpo completo
+
+    cuerpo = sg.SceneGraphNode("cuerpo")
+    cuerpo.childs = [Antenitas, CuerpodeMariposa1, CuerpodeMariposa2]
 
 
     # Alas
@@ -199,16 +203,18 @@ def createButterfly(pipeline):
     Ala4.childs = [Alas]
          
 
-    wings = sg.SceneGraphNode("wings") 
-    wings.transform = tr.scale(abs(cos(controller.total_time * 22)), 1, 0)
-    wings.childs = [Ala1, Ala2, Ala3, Ala4]
+    Alitas = sg.SceneGraphNode("Alitas") 
+    Alitas.transform = tr.scale(abs(cos(controller.total_time * 22)), 1, 0)
+    Alitas.childs = [Ala1, Ala2, Ala3, Ala4]
 
 
     # Butterfly, the one and only
-    Butterfly = sg.SceneGraphNode("Butterfly")
-    Butterfly.childs = [body, wings]
+    Mariposa = sg.SceneGraphNode("Mariposa")
+    Mariposa.childs = [cuerpo, Alitas]
 
-    return Butterfly
+    return Mariposa
+
+# Funcion que crea el escenario para la mariposa
 
 def createscene(pipeline):
     # Convenience function to ease initialization
@@ -251,7 +257,7 @@ def createscene(pipeline):
     ])
     Pasto.childs = [GreenQuadNode]
 
-    #Sol
+    # Sol
     Sol = sg.SceneGraphNode("Sol")
     Sol.transform = tr.matmul([
     tr.scale(150/16,150/9,0),
@@ -259,8 +265,9 @@ def createscene(pipeline):
     ])
     Sol.childs = [YellowCircleNode]
 
-    # Flor
+    # Creacion de Flores
 
+    # Comenzamos con una sola flor
     # Tallo
     Tallo = sg.SceneGraphNode("Tallo")
     Tallo.transform = tr.matmul([
@@ -351,14 +358,9 @@ def createscene(pipeline):
         sg.drawSceneGraphNode(Flores,pipeline,"transform",
                           np.matmul(tr.translate(i*0.27 - 0.5, -0.55, 0), tr.scale(0.02, 0.02, 1)))
 
-
-
-
-
+    # Ya dibujamos las flores, por lo que ahora deolvemos la escena con el sol y el paso.
     Escena = sg.SceneGraphNode("Escena")
     Escena.childs = [Pasto, Sol]
-
-    
 
     return Escena
 
@@ -384,12 +386,12 @@ def on_draw():
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
 
     # Creating shapes on GPU memory
-    Butterfly = createButterfly(pipeline)
+    Mariposa = createButterfly(pipeline)
     Escena = createscene(pipeline)
     # Drawing the Car
     sg.drawSceneGraphNode(Escena,pipeline,"transform",
                           np.matmul(tr.translate(0, 0, 0), tr.scale(0.02, 0.02, 1)))
-    sg.drawSceneGraphNode(Butterfly, pipeline, "transform",
+    sg.drawSceneGraphNode(Mariposa, pipeline, "transform",
                           np.matmul(tr.translate(-0.5 * cos(controller.total_time), 0.5 * sin(controller.total_time), 0.0), tr.scale(0.02, 0.02, 1)))
                              
 
