@@ -2,6 +2,8 @@
 ### 21.087.645-6 ###
 ### Juan.valdivia.g@ug.uchile.cl ###
 
+Librerias utilzadas: os.path, sis, numpy, pyglet, OpenGL.GL, math.
+Librerias de la carpeta grafica: grafica.scene_graph, grafica.basic_shapes, grafica.transformations
 
 Este programa dibuja una mariposa, junto con un escenario, en teoría al momento de ejecutarlo no debiese ocurrir ningún problema
 El programa dibuja una mariposa con 4 triángulos por alas, rotados de cierta manera para asimilarse a la forma de una mariposa,
