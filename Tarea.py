@@ -11,6 +11,7 @@ from math import sin, cos
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import grafica.easy_shaders as es
 import grafica.scene_graph as sg
 import grafica.basic_shapes as bs
 import grafica.transformations as tr
