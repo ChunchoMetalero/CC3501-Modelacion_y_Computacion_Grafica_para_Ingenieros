@@ -1,4 +1,4 @@
-Tarea 2 Mariposa 3D
+##Tarea 2 Mariposa 3D
 
 
 Esta tarea dibuja una mariposa 3D capaz de aletear y de desplazarse a través del input del usuario controlado con WASD, LCTRL y SPACE.
