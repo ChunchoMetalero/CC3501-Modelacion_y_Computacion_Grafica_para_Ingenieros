@@ -1,7 +1,3 @@
-### Juan Ignacio Valdivia ###
-### 21.087.645-6 ###
-### Juan.valdivia.g@ug.uchile.cl ###
-
 Librerias utilzadas: os.path, sis, numpy, pyglet, OpenGL.GL, math.
 Librerias de la carpeta grafica: grafica.easy_shaders, grafica.scene_graph, grafica.basic_shapes, grafica.transformations 
 
